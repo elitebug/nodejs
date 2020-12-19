@@ -1,0 +1,110 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Signup</title>
+  <meta name="description" content="a login page">
+
+  <link rel="stylesheet" href="style.css"> 
+</head>
+
+<body>
+    <h1>SIGN UP</h1>
+
+<p><strong> Username</strong>&nbsp;&nbsp;<input type="text" placeholder="Enter your Name" id="username" required></p>
+
+<p><strong> Email</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Enter your Email" id="email" required></p><strong id = "1"></strong>
+
+<p><strong> Password</strong>&nbsp;&nbsp;<input type="password" placeholder="Enter a Password" id="password" required></p>
+ 
+<input type="button" onclick="redirect()" id="save" value="Submit"><strong id = "2"></strong>
+
+
+
+</body>
+
+<script type="text/javascript">
+var flag = 0;
+
+
+var text1 = localStorage.getItem("testJSON");
+
+    if(text1 == null)
+    {
+        var myObj = { data:[{ name: 'admin', email: "admin", password: "admin" }]};
+
+        var obj = JSON.parse(JSON.stringify(myObj));
+
+    }
+    
+    else
+    {
+        var obj = JSON.parse(text1); 
+
+    }
+
+function redirect()
+{
+    var myJSON, text, check, json, username, email, password; 
+
+    username=document.getElementById("username").value;
+
+    email=document.getElementById("email").value;
+
+    password=document.getElementById("password").value; 
+
+   
+    for(var i = 0; i < obj['data'].length; i++) 
+     {
+
+      var check = obj['data'][i].email;
+
+      if(check == email)
+      {
+        flag = 1;
+        
+      }
+     }
+
+     if(flag == 1)
+     {
+        document.getElementById("1").innerHTML = "Email Already Exist";
+       
+
+     }
+
+
+    else if(username != "" && email != "" && password != "" && flag == 0)
+    {
+
+    obj["data"].push({ name: username, email: email, password: password });
+    console.log(obj);
+
+    myJSON = JSON.stringify(obj);
+
+    localStorage.setItem("testJSON", myJSON);
+
+    text = localStorage.getItem("testJSON");
+
+    check = JSON.parse(text);
+
+    console.log(check['data']); 
+    
+    location.href = "/";
+    
+    
+    }
+    else
+    {
+
+        document.getElementById("2").innerHTML = "Please Fill The Empty Field";
+    }
+    
+}
+
+</script>
+
+
+</html>

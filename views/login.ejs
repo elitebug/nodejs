@@ -1,0 +1,66 @@
+<html>
+ <head><title>test</title>
+  <link rel="stylesheet" href="style.css">
+   </head>
+  <body>
+    <h1><strong>APPLICATION</strong></h1>
+    <p><strong>Username   </strong><input type="text" placeholder="Enter Username" id="userName"><br></p> 
+    <p><strong>Password   </strong><input type="text" placeholder="Enter Password" id="passWord"> <br></p>
+    
+    <input type="button" onclick="check()" value="Login"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong id="1"></strong>
+    
+    </body>
+ <script type="text/javascript">
+ var flag = 0;
+   function check()
+   {
+    var text = localStorage.getItem("testJSON");
+
+    var check = JSON.parse(text);
+
+    console.log(check['data']);
+
+    var user=document.getElementById("userName").value;
+
+     
+     var password=document.getElementById("passWord").value;
+     
+
+     for(var i = 0; i < check['data'].length; i++) 
+     {
+      var obj = check['data'][i].name;
+      var obj2 = check['data'][i].password;
+      
+      console.log(obj);
+      console.log(obj2);
+
+     
+      if(obj == user && obj2 == password)  
+      {
+        
+       flag = 1;
+
+      }
+      
+       }
+
+     /* fgzgzhzh */
+     
+     if(flag == 1)
+     {
+      
+      location.href = "/app";
+     }
+     else
+     {
+      //alert("This value doesnot exist");
+      document.getElementById("1").innerHTML = "Oops Something Went Wrong Try Again"; 
+
+     }
+    
+  
+   }
+ 
+ </script>  
+   
+  </html>  
